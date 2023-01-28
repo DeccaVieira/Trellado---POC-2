@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model employees {
+  employees_id Int        @id @default(autoincrement())
+  username     String     @db.VarChar(50)
+  email        String     @db.VarChar(30)
+  role         String
+  created_at   DateTime?  @default(now()) @db.Timestamp(6)
+  projects     projects[]
+  tasks        tasks[]
+}
+
+model projects {
+  projects_id Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(50)
+  description String?   @db.VarChar(100)
+  employee_id Int
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  employees   employees @relation(fields: [employee_id], references: [employees_id], onDelete: NoAction, onUpdate: NoAction)
+  tasks       tasks[]
+}
+
+model tasks {
+  tasks_id         Int       @id @default(autoincrement())
+  name             String    @db.VarChar(50)
+  description      String    @db.VarChar(100)
+  web_developer_id Int
+  project_id       Int
+  created_at       DateTime? @default(now()) @db.Timestamp(6)
+  projects         projects  @relation(fields: [project_id], references: [projects_id], onDelete: NoAction, onUpdate: NoAction)
+  employees        employees @relation(fields: [web_developer_id], references: [employees_id], onDelete: NoAction, onUpdate: NoAction)
+}
