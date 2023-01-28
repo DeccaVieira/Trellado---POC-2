@@ -1,5 +1,7 @@
 import {Request, Response} from 'express';
+import { Employee } from '../protocols/employeesProtocols.js';
 import employeeService from '../services/employeeService.js';
+
 
 async function getEmployees(req:Request, res:Response) {
   try{
@@ -10,8 +12,20 @@ return res.send(employees );
   }
 }
 
-const employeeController = {
-  getEmployees
+
+async function createNewEmpĺoyee(req:Request, res:Response) {
+  const employee = req.body as Employee;
+  try{
+    await employeeService.createEmployee(employee);
+    return res.sendStatus(201)
+  }catch (error){
+    console.log(error)
+    return res.status(409).send(error);
+  }
 }
 
+const employeeController = {
+  getEmployees,
+  createNewEmpĺoyee
+}
 export default employeeController;
