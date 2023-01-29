@@ -8,10 +8,16 @@ async function getEmployees() {
 }
 
 async function registrationEmployee(employee:Employee) {
-  return await prisma.employees.create({
-    data:employee
-  })
+  console.log(employee,"employee")
+  try{
 
+    await prisma.employees.create({
+      data: employee 
+    })
+    }catch (error){
+      console.log(error)
+    }
+    
   
 }
 

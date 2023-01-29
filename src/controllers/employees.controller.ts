@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {Request, Response} from "express";
 import { Employee } from '../protocols/employeesProtocols.js';
 import employeeService from '../services/employeeService.js';
 
@@ -12,12 +12,13 @@ return res.send(employees );
   }
 }
 
-
-async function createNewEmpĺoyee(req:Request, res:Response) {
-  const employee = req.body as Employee;
+async function createNewEmpĺoyee(req: Request, res: Response) {
+  const employee = req.body as Employee
+ 
   try{
     await employeeService.createEmployee(employee);
-    return res.sendStatus(201)
+ 
+    res.sendStatus(201)
   }catch (error){
     console.log(error)
     return res.status(409).send(error);

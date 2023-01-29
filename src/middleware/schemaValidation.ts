@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from "express";
 function validationSchema<T>(schema: ObjectSchema<T>, err: number): ValidationMiddleware {
   
     return (req: Request, res: Response, next: NextFunction) => { 
+           
       const {error} = schema.validate(req.body, {abortEarly: false});
       
       if (error) {
