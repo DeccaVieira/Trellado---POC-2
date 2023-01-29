@@ -1,8 +1,9 @@
 import {Router} from "express";
+import taskController from "../controllers/tasks.controller.js";
 
 const tasksRouter = Router();
 
-tasksRouter.get("/tasks",(req, res)=> res.send("Ok"));
+tasksRouter.get("/tasks",taskController.getTasks);
 tasksRouter.post("/tasks");
 tasksRouter.put("/tasks");
 tasksRouter.delete("/tasks");

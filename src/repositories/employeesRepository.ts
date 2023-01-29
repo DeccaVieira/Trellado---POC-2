@@ -18,14 +18,19 @@ async function registrationEmployee(employee:Employee) {
     }catch (error){
       throw new Error();
     }
-    
-  
-}
+   }
 
+async function deleteEmployeeById(employees_id){
+  await prisma.employees.delete({
+    where:{employees_id}
+  })
+}
 
 const employeeRepository = {
   getEmployees,
   registrationEmployee,
+  deleteEmployeeById,
+  
  
 }
 

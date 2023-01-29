@@ -1,5 +1,5 @@
 export type Employees ={
-  employees_id: Number,
+  employees_id?: number,
   username:string,
   email: string,
   role:string

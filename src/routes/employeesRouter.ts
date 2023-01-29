@@ -7,6 +7,6 @@ const employeesRouter = Router();
 
 employeesRouter.get("/employees", employeeController.getEmployees);
 employeesRouter.post("/employees",validationSchema(employeeSchema, 422),employeeController.createNewEmpĺoyee);
-employeesRouter.delete("/employees");
+
 
 export default employeesRouter;

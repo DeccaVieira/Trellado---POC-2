@@ -14,9 +14,13 @@ await employeeRepository.registrationEmployee(employee);
 }
 
 
+
+
+
 const employeeService = {
 getEmployees,
-createEmployee
+createEmployee, 
+
 }
 
 export default employeeService;

@@ -20,14 +20,11 @@ await projectRepository.registrationProject(project);
 
 export async function deleteProject(projectId){
   const project = await projectRepository.getProjectId(projectId)
-
- 
   if(!project){
     throw new Error()
   }
  await projectRepository.deleteProjectId(projectId)
 }
-
 
 const projectService = {
 getProjects,
