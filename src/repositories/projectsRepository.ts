@@ -19,17 +19,31 @@ async function registrationProject(project) {
   
 }
 async function findEmployee(email:string){
-
   const data = await prisma.employees.findFirst({
     where: {email}
   })
-    return data
+  return data
+}
 
+
+
+export async function deleteProjectId(projects_id){
+  await prisma.projects.delete({
+    where:{projects_id}
+  })
+}
+
+async function getProjectId(projectId){
+  
+  const data = await prisma.projects.findFirst({
+    where: {projects_id: projectId}
+  })
+  return data;
 }
 
 const projectRepository = {
   getProjects,
-  registrationProject, findEmployee
+  registrationProject, findEmployee,deleteProjectId,getProjectId
 }
 
 export default projectRepository;

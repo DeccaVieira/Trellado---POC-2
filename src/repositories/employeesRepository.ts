@@ -7,15 +7,16 @@ async function getEmployees() {
   return data;
 }
 
+
+
 async function registrationEmployee(employee:Employee) {
-  console.log(employee,"employee")
   try{
 
     await prisma.employees.create({
       data: employee 
     })
     }catch (error){
-      console.log(error)
+      throw new Error();
     }
     
   
@@ -24,7 +25,8 @@ async function registrationEmployee(employee:Employee) {
 
 const employeeRepository = {
   getEmployees,
-  registrationEmployee
+  registrationEmployee,
+ 
 }
 
 export default employeeRepository;

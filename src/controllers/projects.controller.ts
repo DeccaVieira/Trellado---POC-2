@@ -4,6 +4,7 @@ import projectService from '../services/projectService.js';
 
 
 async function getProjects(req:Request, res:Response) {
+  
   try{
 const projects = await projectService.getProjects();
 res.send(projects);
@@ -14,10 +15,10 @@ res.send(projects);
 
 async function createNewProject(req: Request, res: Response) {
   const project = req.body as Project
- console.log(project)
+ 
   try{
     await projectService.createProject(project);
- 
+
     res.sendStatus(201)
   }catch (error){
     console.log(error)
@@ -25,8 +26,19 @@ async function createNewProject(req: Request, res: Response) {
   }
 }
 
+export async function deleteProjectById(req: Request, res: Response){
+  const projectId = Number(req.params.projectId);
+ 
+      try{
+await projectService.deleteProject(projectId);
+return res.send("Excluído com sucesso")
+  }catch(error){
+    return res.status(422).send({error:error, msg:"Não foi possível excluir o projeto"})
+  }
+  }
+
 const projectController = {
   getProjects,
-  createNewProject
+  createNewProject, deleteProjectById
 }
 export default projectController;

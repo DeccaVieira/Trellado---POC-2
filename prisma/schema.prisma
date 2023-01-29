@@ -8,21 +8,21 @@ datasource db {
 }
 
 model employees {
-  employees_id Int        @id @default(autoincrement())
-  username     String     @db.VarChar(50)
-  email        String     @db.VarChar(30)
+  employees_id Int       @id @default(autoincrement())
+  username     String    @db.VarChar(50)
+  email        String    @db.VarChar(30)
   role         String
-  projects     projects[]
+  created_at   DateTime? @default(now()) @db.Timestamp(6)
   tasks        tasks[]
 }
 
 model projects {
-  projects_id Int       @id @default(autoincrement())
-  name        String?   @db.VarChar(50)
-  description String?   @db.VarChar(100)
-  employee_id Int
-  employees   employees @relation(fields: [employee_id], references: [employees_id], onDelete: NoAction, onUpdate: NoAction)
-  tasks       tasks[]
+  projects_id    Int       @id @default(autoincrement())
+  name           String?   @db.VarChar(50)
+  description    String?   @db.VarChar(100)
+  employee_email String
+  created_at     DateTime? @default(now()) @db.Timestamp(6)
+  tasks          tasks[]
 }
 
 model tasks {
