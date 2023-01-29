@@ -1,5 +1,5 @@
 import { prisma } from "@prisma/client";
-import { Tasks } from "../protocols/tasks.protocols.js"
+import { NewTask, Tasks, TaskUpdate } from "../protocols/tasks.protocols.js"
 import taskRepository from "../repositories/tasksRepository.js";
 
 export async function getTasks(){
@@ -14,8 +14,13 @@ export async function createTask(task){
   
   }
 
+  export async function updateTask(taskId:number, task :TaskUpdate){
+    await taskRepository.getTask(taskId);
+    await taskRepository.updateTaskById(taskId, task);
+  }
+
 const taskService = {
-  getTasks, createTask
+  getTasks,createTask,updateTask
   }
   
   export default taskService;

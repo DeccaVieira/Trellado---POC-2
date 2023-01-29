@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import  {Task, Tasks} from '../protocols/tasks.protocols.js';
+import  {NewTask, TaskUpdate} from '../protocols/tasks.protocols.js';
 import taskService from "../services/tasksService.js";
 
 
@@ -13,7 +13,7 @@ res.send(tasks);
   }
 }
 async function createNewTask(req: Request, res: Response) {
-  const task = req.body as Task
+  const task = req.body as NewTask
  
   try{
     await taskService.createTask(task);
@@ -25,7 +25,19 @@ async function createNewTask(req: Request, res: Response) {
   }
 }
 
+async function putTask(req: Request, res: Response){
+  const {taskId}  = req.params;
+  const task = req.body as TaskUpdate
+  try{
+await taskService.updateTask(parseInt(taskId), task);
+  }catch (error){
+    console.log(error)
+    return res.status(409).send(error);
+  }
+}
+
+
 const taskController = {
-  getTasks, createNewTask
+  getTasks, createNewTask,putTask
 }
 export default taskController
