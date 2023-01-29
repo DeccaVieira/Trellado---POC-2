@@ -12,21 +12,21 @@ res.send(projects);
   }
 }
 
-// async function createNewProject(req: Request, res: Response) {
-//   const project = req.body as Project
+async function createNewProject(req: Request, res: Response) {
+  const project = req.body as Project
+ console.log(project)
+  try{
+    await projectService.createProject(project);
  
-//   try{
-//     await projectService.createProject(project);
- 
-//     res.sendStatus(201)
-//   }catch (error){
-//     console.log(error)
-//     return res.status(409).send(error);
-//   }
-// }
+    res.sendStatus(201)
+  }catch (error){
+    console.log(error)
+    return res.status(409).send(error);
+  }
+}
 
 const projectController = {
   getProjects,
-  // createNewProject
+  createNewProject
 }
 export default projectController;

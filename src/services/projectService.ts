@@ -1,3 +1,4 @@
+import { prisma } from "@prisma/client";
 import { Project } from "../protocols/projectsProtocols.js";
 import projectRepository from "../repositories/projectsRepository.js";
 
@@ -7,16 +8,16 @@ const projects = await projectRepository.getProjects();
 return projects;
 }
 
-// export async function createProject(project:Project){
+export async function createProject(project:Project){
+  
+await projectRepository.registrationProject(project);
 
-// await projectRepository.registrationProject(project);
-
-// }
+}
 
 
 const projectService = {
 getProjects,
-// createProject
+createProject
 }
 
 export default projectService;

@@ -7,23 +7,29 @@ async function getProjects() {
   return data;
 }
 
-// async function registrationProject(project:Project) {
-//   console.log(project,"project")
-//   try{
-// await prisma.projects.create({
-//   data: project
-// })
-//     }catch (error){
-//       console.log(error)
-//     }
+async function registrationProject(project) {
+  try{
+    await prisma.projects.create({
+      data:project
+    })
+    }catch (error){
+      console.log(error)
+    }
     
   
-// }
+}
+async function findEmployee(email:string){
 
+  const data = await prisma.employees.findFirst({
+    where: {email}
+  })
+    return data
+
+}
 
 const projectRepository = {
   getProjects,
-  // registrationProject
+  registrationProject, findEmployee
 }
 
 export default projectRepository;

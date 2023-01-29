@@ -21,7 +21,6 @@ model projects {
   name        String?   @db.VarChar(50)
   description String?   @db.VarChar(100)
   employee_id Int
-  created_at  DateTime? @default(now()) @db.Timestamp(6)
   employees   employees @relation(fields: [employee_id], references: [employees_id], onDelete: NoAction, onUpdate: NoAction)
   tasks       tasks[]
 }
