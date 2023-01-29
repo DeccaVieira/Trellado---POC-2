@@ -7,8 +7,15 @@ const projects = await taskRepository.getAllTasks();
 return projects;
 }
 
+export async function createTask(task){
+ 
+  
+  await taskRepository.createNewTask(task);
+  
+  }
+
 const taskService = {
-  getTasks
+  getTasks, createTask
   }
   
   export default taskService;
