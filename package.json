@@ -5,7 +5,11 @@
   "description": "Poc Trellado",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "prisma:seed": "npx prisma db seed"
+  },
+  "prisma": {
+    "seed" : "ts-node prisma/seed.ts"
   },
   "repository": {
     "type": "git",
